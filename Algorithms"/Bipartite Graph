@@ -1,0 +1,33 @@
+map<int,list<int>>mp;
+map<int,bool>visited;
+int cnt=0;
+void join(int a,int b)
+{
+	mp[a].pb(b);
+	mp[b].pb(a);
+}
+void bfs(int src,int parent[])
+{
+	queue<int>q;
+	visited[src]=true;
+	q.push(src);
+	while(!q.empty())
+	{
+		int t=q.front();
+		q.pop();
+		for(auto i:mp[t])
+		{
+			if(!visited[i])
+			{
+				parent[i]=(parent[t]+1)%2;
+				visited[i]=true;
+				q.push(i);
+			}
+			else if(visited[i]==true and parent[i]==parent[t])
+		{
+			cnt++;
+
+		}
+		}
+	}
+}
