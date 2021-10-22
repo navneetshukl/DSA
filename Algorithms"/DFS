@@ -1,0 +1,18 @@
+map<int,list<int>>mp;
+map<int,bool>visited;
+void dfs(int src)
+{
+	visited[src]=true;
+	for(auto i:mp[src])
+	{
+		if(!visited[i])
+		{
+			dfs(i);
+		}
+	}
+}
+void join(int a,int b)
+{
+	mp[a].pb(b);
+	mp[b].pb(a);
+}
