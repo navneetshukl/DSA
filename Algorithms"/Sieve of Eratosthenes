@@ -1,0 +1,20 @@
+int prime[1000006]={0};
+void primes()
+{
+	loop(i,0,1000005)
+	{
+		prime[i]=0;
+	}
+	prime[1]=1;
+	prime[0]=1;
+	for(int i=2;i*i<=1000005;i++)
+	{
+		if(prime[i]==0)
+		{
+			for(int j=i*i;j<=1000005;j+=i)
+			{
+				prime[j]=1;
+			}
+		}
+	}
+}
