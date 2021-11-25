@@ -1,0 +1,77 @@
+#include<iostream>
+#include<list>
+#include<map>
+#include<vector>
+using namespace std;
+class graph
+{
+    map<int,list<int>>mp;
+    map<int,bool>visited;
+    map<int,int>v;
+public:
+    void add(int x,int y)
+    {
+        mp[x].push_back(y);
+        mp[y].push_back(x);
+    }
+    void dfs_help(int src)
+    {
+        visited[src]=true;
+        for(auto i:mp[src])
+        {
+            v[i]++;
+            if(!visited[i])
+            {
+                dfs_help(i);
+            }
+        }
+    }
+    void dfs()
+    {
+        for(auto i:mp)
+        {
+            visited[i.first]=false;
+        }
+        int c=0;
+        int c1=0;
+        int c2=0;
+        for(auto i:mp)
+        {
+            if(!visited[i.first])
+            {
+                dfs_help(i.first);
+                c1=0;
+                c2=0;
+                for(auto i:v)
+                {
+                    c1++;
+                    if(i.second==2)
+                    {
+                        c2++;
+                    }
+                }
+                if(c1==c2)
+                {
+                    c++;
+                }
+                v.clear();
+            }
+        }
+        cout<<c;
+    }
+};
+int main()
+{
+   graph g;
+   int n,m;
+   cin>>n>>m;
+   while(m--)
+   {
+       int x,y;
+       cin>>x>>y;
+       g.add(x,y);
+   }
+   g.dfs();
+   return 0;
+
+}
