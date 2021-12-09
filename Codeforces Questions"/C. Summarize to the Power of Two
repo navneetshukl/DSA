@@ -1,0 +1,41 @@
+#include<iostream>
+#include<map>
+#include<vector>
+#include<math.h>
+#include<cstring>
+using namespace std;
+int main()
+{
+    long long n,i,c=0,j;
+    cin>>n;
+    long long m[n];
+    map <long long,long long>mp;
+    for(i=0;i<n;i++)
+    {
+        cin>>m[i];
+        mp[m[i]]++;
+    }
+    /*for(i=0;i<n;i++)
+    {
+        cout<<cnt[m[i]]<<" ";
+    }*/
+    vector<long long>v;
+    for(i=0;i<=30;i++)
+    {
+        v.push_back(pow(2,i));
+    }
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<=30;j++)
+        {
+            if(mp.count(v[j]-m[i]) and(mp[v[j]-m[i]]>1 or (mp[v[j]-m[i]]==1 and v[j]-m[i]!=m[i] )))
+            {
+                c++;
+                break;
+            }
+        }
+    }
+    cout<<n-c<<endl;
+    return 0;
+
+}
