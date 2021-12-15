@@ -1,0 +1,40 @@
+void build(ll tree[],ll m[],ll st,ll en,ll idx)
+{
+	if(st==en)
+	{
+		tree[idx]=m[st];
+		return;
+	}
+	ll mid=(st+en)/2;
+	build(tree,m,st,mid,2*idx);
+	build(tree,m,mid+1,en,2*idx+1);
+	tree[idx]=tree[2*idx]+tree[2*idx+1];
+	return;
+}
+void update(ll tree[],ll st,ll en,ll idx,ll i,ll val)
+{
+	if(i<st or i>en) return;
+	if(st==en) 
+	{
+		tree[idx]=val;
+		return;
+	}
+	ll mid=(st+en)/2;
+	update(tree,st,mid,2*idx,i,val);
+	update(tree,mid+1,en,2*idx+1,i,val);
+	tree[idx]=tree[2*idx]+tree[2*idx+1];
+	return;
+}
+ll query(ll tree[],ll st,ll en,ll x,ll y,ll idx)
+{
+	if(y<st or x>en) return 0;
+	if(st>=x and en<=y) return tree[idx];
+	ll mid=(st+en)/2;
+	ll a=query(tree,st,mid,x,y,2*idx);
+	ll b=query(tree,mid+1,en,x,y,2*idx+1);
+	return a+b;
+}
+
+**********************************************************************************************************************************************************************************************
+  Size of the Segment Tree Array will be 4*n+1. Here 'n' is the size of the given array for which we are constructing the segment tree.
+ Long Long tree[4*n+1];
