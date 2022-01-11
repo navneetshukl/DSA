@@ -1,0 +1,106 @@
+// Problem Link - https://codeforces.com/contest/1622/problem/C
+/* By Navneet Shukla*/
+#include<bits/stdc++.h>
+//#include<ext/pb_ds/assoc_container.hpp>
+//using namespace __gnu_pbds;
+using namespace std;
+#define ll 				long long int
+#define ld				long double
+#define mod             1000000007
+#define inf             1e18
+#define endl			"\n"
+#define pb 				emplace_back
+#define vi              vector<ll>
+#define vs				vector<string>
+#define pii             pair<ll,ll>
+#define ump				unordered_map
+#define mpa 				make_pair
+#define pq_max          priority_queue<ll>
+#define pq_min          priority_queue<ll,vi,greater<ll> >
+#define ff 				first
+#define ss 				second
+#define mid(l,r)        (l+(r-l)/2)
+#define loop(i,a,b) 	for(int i=(a);i<=(b);i++)
+#define looprev(i,a,b) 	for(int i=(a);i>=(b);i--)
+#define log(args...) 	{ string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
+#define logarr(arr,a,b)	for(int z=(a);z<=(b);z++) cout<<(arr[z])<<" ";cout<<endl;	
+#define token(str,ch)	(std::istringstream var((str)); vs v; string t; while(getline((var), t, (ch))) {v.pb(t);} return v;)
+vs tokenizer(string str,char ch) {std::istringstream var((str)); vs v; string t; while(getline((var), t, (ch))) {v.pb(t);} return v;}
+
+
+void err(istream_iterator<string> it) {}
+template<typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args) {
+	cout << *it << " = " << a << endl;
+	err(++it, args...);
+}
+//typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+
+void file_i_o()
+{
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
+    cout.tie(0);
+	#ifndef ONLINE_JUDGE
+	    freopen("input.txt", "r", stdin);
+	    freopen("output.txt", "w", stdout);
+	#endif
+}
+
+int modularExponentiation(int x,int n,int M)
+{
+    if(n==0)
+        return 1;
+    else if(n%2 == 0)        //n is even
+        return modularExponentiation((x*x)%M,n/2,M);
+    else                             //n is odd
+        return (x*modularExponentiation((x*x)%M,(n-1)/2,M))%M;
+
+}
+ll div1(ll a, ll b) {
+	if(a%b==0) return a/b;
+	else return a/b+1;
+}
+int main(int argc, char const *argv[]) {
+	file_i_o();
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll n,k;
+		cin>>n>>k;
+		ll m[n+1]={0};
+		loop(i,1,n) cin>>m[i];
+		ll s=0;
+		loop(i,1,n)
+		{
+			s+=m[i];
+		}
+		sort(m+1,m+n+1);
+		ll mi=s-k;
+		if(s<=k) cout<<0<<endl;
+		else if(s==k+1) cout<<1<<endl;
+		else
+		{
+			ll diff=s-k;
+			s=0;
+		//	ll x;
+			for(int i=n;i>1;i--)
+			{
+				s+=m[i];
+				ll x;
+				if(s-(n-i+1)*m[1]>=diff)x=0;
+				else
+				{
+					ll d1=diff-s+((n-i+1)*m[1]);
+					ll u=0;
+					ll j=div1(diff-s+((n-i+1)*m[1]),n-i+2);
+					x=max(j,u);
+				}
+				mi=min(mi,x+n-i+1);
+			}
+		cout<<mi<<endl;
+		}
+	}
+	return 0;
+}
