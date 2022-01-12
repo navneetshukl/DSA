@@ -1,0 +1,33 @@
+map<int,list<pair<int,int>>>mp;
+map<int,int>dist;
+void join(int a,int b,int w)
+{
+	mp[a].pb(mpa(b,w));
+	mp[b].pb(mpa(a,w));
+}
+void dijkstra(int src)
+{
+	priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;//min heap
+	for(auto i:mp)
+	{
+		dist[i.ff]=INT_MAX;
+	}
+	pq.push({0,src});
+	dist[src]=0;
+	while(!pq.empty())
+	{
+		int curr_n=pq.top().ss;
+		int curr_d=pq.top().ff;
+		pq.pop();
+		for(auto i:mp[curr_n])
+		{
+			if(curr_d+i.ss<dist[i.ff])
+			{
+				dist[i.ff]=curr_d+i.ss;
+				pq.push({dist[i.ff],i.ff});
+
+			}
+		}
+	}
+
+}
