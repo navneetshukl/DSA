@@ -1,0 +1,17 @@
+ void dfs(int src,int visited[])
+    {
+        visited[src]=true;
+        for(auto i:mp[src])
+        {
+            if(!visited[i])
+            {
+                dfs(i,visited);
+            }
+        }
+        vec.push_back(src);
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    Run this algorithm from every non visited node and after completing all the traversal of the node push it to the vector and then reverse the vector to get the answer.
+    Alternative of the vector we can use the stack.
