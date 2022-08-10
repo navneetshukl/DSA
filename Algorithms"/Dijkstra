@@ -1,3 +1,8 @@
+//ff====>first;
+//ss====>second
+//pb====>push_back()
+
+
 map<int,list<pair<int,int>>>mp;
 map<int,int>dist;
 void join(int a,int b,int w)
