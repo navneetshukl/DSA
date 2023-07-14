@@ -82,3 +82,73 @@ int main(int argc, char const *argv[]) {
 	cout<<ans<<endl;
 	return 0;
 }
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////
+
+
+
+Let us first consider a naive DP (Dynamic Programming). Define a DP table
+
+dpi,j​ by
+
+dpi,j​:= the number of prefixes of lengths i of such sequences such that
+
+    ci​=j.
+
+Then, focusing on the
+
+i-th element,
+
+    if 
+
+    ai​≤j≤bi​, it is accepted as long as it is is greater than or equal to the previous element
+    otherwise, it is unaccepted.
+
+Thus, we have the following transitions.
+(For convenience, we regard that the
+0-th element of C is
+
+0, in order to reduce case divisions.)
+
+dpi,j​=⎩⎪⎪⎨⎪⎪⎧​1∑0≤k≤j​dpi−1,k​0​i=0∧j=0i≥1∧ai​≤j≤bi​otherwise.​
+
+This expression can be computed in the increasing order of
+i. Also, the answer is expressed as the sum of all possible prefixes of lengths
+
+N, that is,
+
+dpN,0​+dpN,1​+⋯+dpN,M​,
+
+where
+
+M:=max(max(A),max(B)).
+Therefore, we have now found an algorithm of finding the answer in a polynomial time. The DP defined by the transitions above has
+
+O(NM) number of elements that are to updated, and
+
+    O(M) time complexity required to compute each element,
+
+so the total time complexity is
+
+O(NM2). However, this leads to TLE (Time Limit Exceeded), so we somehow want to reduce the complexity of the DP.
+
+Now, notice that the transition has a form of
+∑0≤k≤j​dpi−1,k​, which enables us to manage cumulative sums on DP. Let us define a table of cumulative sums of DP,
+
+Ri,j​, as
+
+    Ri,j​:=∑0≤k≤j​dpi,k​.
+
+Then the DP mentioned above is expressed as
+
+Ri,j​=⎩⎪⎪⎨⎪⎪⎧​1Ri,j−1​+Ri−1,j​Ri,j−1​​i=0∧j=0i≥1∧ai​≤j≤bi​otherwise,​
+
+so the time complexity required to compute each element is reduced to
+O(1). By making use of this expression to compute DP, the problem has been solved in a total of O(NM) time.
