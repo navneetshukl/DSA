@@ -1,0 +1,51 @@
+1.Start ZooKeeper (Required for Kafka):
+
+    Kafka relies on Apache ZooKeeper, so you need to start ZooKeeper first.
+
+    Open a command prompt and navigate to your Kafka directory (C:\kafka).
+
+    Run the following command to start ZooKeeper:
+
+    shell
+
+    .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+2.Start Kafka Server:
+
+    Open a new command prompt window (keep ZooKeeper running in the previous one) and navigate to your Kafka directory.
+
+    Run the following command to start the Kafka server:
+
+    shell
+
+    .\bin\windows\kafka-server-start.bat .\config\server.properties
+
+    Kafka should now be up and running on your local machine.
+
+3.Create Kafka Topics:
+
+    You can create Kafka topics using the kafka-topics.bat script. For example, to create a topic named "my-topic," use the following command:
+
+    shell
+
+    .\bin\windows\kafka-topics.bat --create --topic my-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+    Adjust the topic name, partitions, and replication factor as needed.
+
+4.Produce and Consume Messages:
+
+    You can now use the kafka-console-producer.bat and kafka-console-consumer.bat scripts to produce and consume messages from your Kafka topic.
+
+    To produce messages to "my-topic," open a new command prompt and run:
+
+    shell
+
+.\bin\windows\kafka-console-producer.bat --topic my-topic --bootstrap-server localhost:9092
+
+To consume messages from "my-topic," open another command prompt and run:
+
+shell
+
+        .\bin\windows\kafka-console-consumer.bat --topic my-topic --bootstrap-server localhost:9092 --from-beginning
+
+You now have Kafka running on your Windows machine, and you can start producing and consuming messages. Remember to stop the Kafka server and ZooKeeper when you're done using them.
