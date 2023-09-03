@@ -1,4 +1,4 @@
-#First go to the location where kafka is stored.In my case it is C:/kafka
+First go to the location where kafka is stored.In my case it is C:/kafka
 
 1.Start ZooKeeper (Required for Kafka):
 
