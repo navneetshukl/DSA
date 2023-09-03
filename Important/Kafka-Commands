@@ -1,3 +1,5 @@
+#First go to the location where kafka is stored.In my case it is C:/kafka
+
 1.Start ZooKeeper (Required for Kafka):
 
     Kafka relies on Apache ZooKeeper, so you need to start ZooKeeper first.
