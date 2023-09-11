@@ -1,0 +1,6 @@
+Docker-Commands for Redis
+
+1. docker pull redis
+2. docker run -d -p 6379:6379 redis
+3. Now get the container id using command docker ps
+4. docker exec -it <Container-ID> redis-cli
